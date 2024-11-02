@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app # Montar el código fuente
+      - /app/node_modules # Evitar que se sobrescriban los módulos de node
+    networks:
+      - app-network
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
